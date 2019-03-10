@@ -1,0 +1,34 @@
+﻿<nav class="navbar navbar-dark bg-dark mb-5">
+  <a class="navbar-brand" href="#">Les Restos d'OSS</a>
+  <div class="navbar-expand mr-auto">
+    <div class="navbar-nav">
+      <a *ngIf="router.url !== '/map'" class="nav-item nav-link" [routerLink]="['map']">Map</a>
+      <a *ngIf="router.url !== '/dashboard'" class="nav-item nav-link" [routerLink]="['dashboard']">Dashboard</a>
+    </div>
+  </div>
+  <h3 class="white">
+    {{utilisateur?'Bonjour '+utilisateur.firstName:''}}
+  </h3>
+  <div class="navbar-expand ml-auto navbar-nav">
+    <div class="navbar-nav">
+      <a [hidden]="utilisateur" class="nav-item nav-link" [routerLink]="['login']">Connexion</a>
+      <a [hidden]="!utilisateur" class="nav-item nav-link" (click)="logout()">Deconnexion</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- main app container -->
+
+<div class="container" style="padding-bottom: 70px;" >
+  <alert></alert>
+  <router-outlet ></router-outlet>
+</div>
+
+
+<!-- credits -->
+<nav class="navbar navbar-dark bg-dark mt-5 fixed-bottom" >
+  <div class="navbar-expand m-auto navbar-text">
+    Fait avec <i class="fa fa-heart"></i> par Brice
+  </div>
+</nav>

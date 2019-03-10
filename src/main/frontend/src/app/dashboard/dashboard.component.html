@@ -1,0 +1,22 @@
+<div class="row">
+  <div *ngIf="utilisateur"  class="col-md-3" [routerLink]="['/add']">
+    <div class="module resto">
+      <h1>+</h1>
+    </div>
+  </div>
+  <div *ngFor="let resto of orderByDate(restos, 'date', true)" class="col-md-3" [routerLink]="['/detail/', resto.id]">
+    <div [ngStyle]="{'border-color': resto.monId?'rgb(255, 64, 0)':'rgb(147, 147, 147)'}"
+      class="module resto">
+
+
+      <img *ngIf="resto.rating>0" class="image" src="assets/SogetiNew.png" alt="" />
+      <img *ngIf="resto.rating>1" class="image2" src="assets/SogetiNew.png" alt="" />
+      <img *ngIf="resto.rating>2" class="image3" src="assets/SogetiNew.png" alt="" />
+      <img *ngIf="resto.rating>3" class="image4" src="assets/SogetiNew.png" alt="" />
+      <img *ngIf="resto.rating>4" class="image5" src="assets/SogetiNew.png" alt="" />
+
+      <h3> {{resto.nom}}</h3>
+    </div>
+  </div>
+
+</div>

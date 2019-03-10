@@ -1,0 +1,104 @@
+/* DashboardComponent's private CSS styles */
+[class*='col-'] {
+  float: left;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+[class*='col-']:last-of-type {
+  padding-right: 0;
+}
+a {
+  text-decoration: none;
+}
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+h3 {
+  text-align: center; margin-bottom: 0;
+}
+h4 {
+  position: relative;
+}
+.grid {
+  margin: 0;
+}
+.col-1-4 {
+  width: 25%;
+}
+
+[class*="col-"][_ngcontent-c0]:last-of-type {
+  padding-right: 20px;
+}
+
+.module {
+  padding: 10px !important;
+  text-align: center;
+  color: #eee;
+  min-height: 120px;
+  max-height: 120px;
+  min-width: 120px;
+  background-color: dimgrey;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 5px !important;
+}
+.module:hover {
+  background-color: #EEE;
+  cursor: pointer;
+  color: dimgrey;
+}
+.grid-pad {
+  padding: 10px 0;
+}
+.grid-pad > [class*='col-']:last-of-type {
+  padding-right: 20px;
+}
+@media (max-width: 600px) {
+  .module {
+    font-size: 10px;
+    max-height: 75px; }
+}
+@media (max-width: 1024px) {
+  .grid {
+    margin: 0;
+  }
+  .module {
+    min-width: 60px;
+  }
+}
+.image{
+  position: absolute;
+  top: 80px;
+  left: 50px;
+  z-index: 0;
+}
+
+.image2{
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  z-index: 0;
+}
+
+.image3{
+  position: absolute;
+  top: 80px;
+  left: 110px;
+  z-index: 0;
+}
+
+.image4{
+  position: absolute;
+  top: 80px;
+  left: 140px;
+  z-index: 0;
+}
+
+.image5{
+  position: absolute;
+  top: 80px;
+  left: 170px;
+  z-index: 0;
+}

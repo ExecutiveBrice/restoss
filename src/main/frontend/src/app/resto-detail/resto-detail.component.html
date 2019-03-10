@@ -1,0 +1,527 @@
+<div *ngIf="resto">
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <div *ngIf="nouveau || modification">
+        <div class="input-group mb-3 input-group-lg">
+          <div class="input-group-prepend">
+            <span class="input-group-text">nom du restaurant : </span>
+          </div>
+          <input type="text" [(ngModel)]="resto.nom" class="form-control">
+        </div>
+      </div>
+      <div *ngIf="!nouveau && !modification">
+        <h1>{{resto.nom | uppercase}}</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <div *ngIf="nouveau || modification">
+        <div class="input-group mb-3 input-group-lg">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Citation : </span>
+          </div>
+          <input type="text" [(ngModel)]="resto.citation" class="form-control">
+        </div>
+      </div>
+      <div *ngIf="!nouveau && !modification">
+        <h4><i>{{resto.citation | uppercase}}</i></h4>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="nouveau || modification">
+            <div class="form-group">
+              <label for="date">Visité le :</label>
+              <input [(ngModel)]="resto.date " type="date" class="form-control" id="date">
+            </div>
+          </div>
+          <div *ngIf="!nouveau && !modification">
+            <h4>{{resto.date | date: 'dd MMMM yyyy HH:mm'}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 *ngIf="resto.rating"><u>Note :</u> {{resto.rating}}/5</h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="nouveau || modification">
+            <div class="form-group">
+              <label for="menu">Prix de l'EPD :</label>
+              <input [(ngModel)]="resto.menu" type="text" class="form-control" id="menu">
+            </div>
+          </div>
+          <div *ngIf="!nouveau && !modification">
+            <h5>EPD : {{resto.menu}} euros</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="nouveau || modification">
+            <div class="form-group">
+              <label for="entreplat">EP/PD :</label>
+              <input [(ngModel)]="resto.entreplat" type="text" class="form-control" id="entreplat">
+            </div>
+          </div>
+          <div *ngIf="!nouveau && !modification">
+            <h5>EP/PD : {{resto.entreplat}} euros</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="nouveau || modification">
+            <div class="form-group">
+              <label for="plat">Plat seul:</label>
+              <input [(ngModel)]="resto.plat" type="text" class="form-control" id="plat">
+            </div>
+          </div>
+          <div *ngIf="!nouveau && !modification">
+            <h5>P : {{resto.plat}} euros</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="nouveau || modification">
+            <div class="form-group">
+              <label for="comment"><u>Description :</u></label>
+              <textarea [(ngModel)]="resto.description" class="form-control" rows="5" id="comment"></textarea>
+            </div>
+          </div>
+          <div *ngIf="!nouveau && !modification">
+            <h5><u>Description :</u></h5>
+            {{resto.description}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="nouveau || modification">
+            <div class="form-group">
+              <label for="website">Web Site :</label>
+              <input [(ngModel)]="resto.website" type="text" class="form-control" id="website">
+            </div>
+          </div>
+          <div *ngIf="!nouveau && !modification && resto.website">
+            <button type="button" class="btn btn-secondary" (click)="openLink(resto)">Web Site</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="nouveau || modification">
+            <div class="form-group">
+              <label for="adresse">Adresse :</label>
+              <input [(ngModel)]="resto.adresse" type="text" class="form-control" id="adresse">
+            </div>
+          </div>
+          <div *ngIf="!nouveau && !modification">
+            <h5><u>Adresse :</u></h5>
+            <h6>{{resto.adresse}}</h6>
+            <div id="map"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="nouveau || modification">
+            <div class="form-group">
+              <label for="tel">Téléphone :</label>
+              <input [(ngModel)]="resto.tel" type="text" class="form-control" id="tel">
+            </div>
+          </div>
+          <div *ngIf="!nouveau && !modification">
+            <h5><u>Tel :</u> {{resto.tel}}</h5>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="nouveau || modification">
+            <div class="form-group">
+              <label for="latitude">Latitude :</label>
+              <input [(ngModel)]="resto.latitude" type="text" class="form-control" id="latitude">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="nouveau || modification">
+            <div class="form-group">
+              <label for="longitude">Longitude :</label>
+              <input [(ngModel)]="resto.longitude" type="text" class="form-control" id="longitude">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button [hidden]="resto.id || !utilisateur || (!modification && !nouveau)" type="button" class="btn btn-secondary"
+            (click)="saveResto()">
+            Ajouter ce restaurant</button>
+          <button [hidden]="!resto.id || !utilisateur || !modification" type="button" class="btn btn-secondary" (click)="updateResto()">
+            Modifier ce restaurant</button>
+          <button [hidden]="!utilisateur || modification || nouveau" type="button" class="btn btn-secondary" (click)="modification=true">Modifier</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-4">
+      <img class="container" *ngIf="resto.image" [src]="sanitizer.bypassSecurityTrustUrl(resto.image)">
+      <div class="row">
+        <div class="col-sm-12">
+          <div [hidden]="!spinner_overlay" class="spinner_overlay">
+            <i class="fa fa-spinner fa-spin" style="font-size:200px;color:red"></i>
+          </div>
+          <input [hidden]="!utilisateur || (!modification && !nouveau) " type="file" (change)="onImageChange($event)" accept="image/*">
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!nouveau" class="col-sm-4">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- now<resto.date && si plus de vote après-->
+          <button *ngIf=" utilisateur && !monvote" type="button" class="btn btn-secondary" (click)="addVote()">
+            Je serai présent</button>
+          <button *ngIf=" utilisateur && !monvote" type="button" class="btn btn-secondary" (click)="addVoteAbsent()">
+            Nan j'veux pas</button>
+          <button *ngIf=" utilisateur && (monvote && monvote.present == 0)" type="button" class="btn btn-secondary" (click)="modifyVote()">
+            Je serai présent</button>
+          <button *ngIf=" utilisateur && monvote && monvote.present == 1" type="button" class="btn btn-secondary" (click)="removeVote()">
+            Finalement j'ai aquaponey</button>
+
+
+        </div>
+      </div>
+
+
+      <div *ngIf="resto.votes" class="row">
+        <div class="col-sm-12">
+
+          <h3><u>Les presents :</u> {{(monvote && monvote.present==1)?resto.votes.length+1:resto.votes.length}}</h3>
+        </div>
+      </div>
+
+
+
+
+      <div *ngIf="!nouveau && now>resto.date && monvote && modifvote" class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Bouffe :</h4>
+            </div>
+            <div class="col-sm-6">
+              <img class="star" src="assets/jaune.png" title="BRoowwwaaeargggg (bruit de vomissement)" [hidden]="monvote.rating<1"
+                (click)='monvote.rating=1'>
+              <img class="star" src="assets/noir.png" title="BRoowwwaaeargggg (bruit de vomissement)" [hidden]="monvote.rating>0"
+                (click)='monvote.rating=1'>
+
+              <img class="star" src="assets/jaune.png" title="Bof bof" [hidden]="monvote.rating<2" (click)='monvote.rating=2'>
+              <img class="star" src="assets/noir.png" title="Bof bof" [hidden]="monvote.rating>1" (click)='monvote.rating=2'>
+
+              <img class="star" src="assets/jaune.png" title="Je fais la meme chose à la maison" [hidden]="monvote.rating<3"
+                (click)='monvote.rating=3'>
+              <img class="star" src="assets/noir.png" title="Je fais la meme chose à la maison" [hidden]="monvote.rating>2"
+                (click)='monvote.rating=3'>
+
+              <img class="star" src="assets/jaune.png" title="Miam" [hidden]="monvote.rating<4" (click)='monvote.rating=4'>
+              <img class="star" src="assets/noir.png" title="Miam" [hidden]="monvote.rating>3" (click)='monvote.rating=4'>
+
+              <img class="star" src="assets/jaune.png" title="On ne mange pas les oeuvres d'art" [hidden]="monvote.rating<5"
+                (click)='monvote.rating=5'>
+              <img class="star" src="assets/noir.png" title="On ne mange pas les oeuvres d'art" [hidden]="monvote.rating>4"
+                (click)='monvote.rating=5'>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Service :</h4>
+            </div>
+            <div class="col-sm-6">
+              <img class="star" src="assets/jaune.png" title="Hého ! On est là !" [hidden]="monvote.rating2<1" (click)='monvote.rating2=1'>
+              <img class="star" src="assets/noir.png" title="Hého ! On est là !" [hidden]="monvote.rating2>0" (click)='monvote.rating2=1'>
+
+              <img class="star" src="assets/jaune.png" title="On mange dans la cuisine?" [hidden]="monvote.rating2<2"
+                (click)='monvote.rating2=2'>
+              <img class="star" src="assets/noir.png" title="On mange dans la cuisine?" [hidden]="monvote.rating2>1"
+                (click)='monvote.rating2=2'>
+
+              <img class="star" src="assets/jaune.png" title="Ouai, comme à la maison quoi ?!" [hidden]="monvote.rating2<3"
+                (click)='monvote.rating2=3'>
+              <img class="star" src="assets/noir.png" title="Ouai, comme à la maison quoi ?!" [hidden]="monvote.rating2>2"
+                (click)='monvote.rating2=3'>
+
+              <img class="star" src="assets/jaune.png" title="Pas mal du tout" [hidden]="monvote.rating2<4" (click)='monvote.rating2=4'>
+              <img class="star" src="assets/noir.png" title="Pas mal du tout" [hidden]="monvote.rating2>3" (click)='monvote.rating2=4'>
+
+              <img class="star" src="assets/jaune.png" title="On est bien là, non ?" [hidden]="monvote.rating2<5"
+                (click)='monvote.rating2=5'>
+              <img class="star" src="assets/noir.png" title="On est bien là, non ?" [hidden]="monvote.rating2>4"
+                (click)='monvote.rating2=5'>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Tarif :</h4>
+            </div>
+            <div class="col-sm-6">
+              <img class="star" src="assets/jaune.png" title="On ne veut pas acheter le resto" [hidden]="monvote.rating3<1" (click)='monvote.rating3=1'>
+              <img class="star" src="assets/noir.png" title="On ne veut pas acheter le resto" [hidden]="monvote.rating3>0" (click)='monvote.rating3=1'>
+
+              <img class="star" src="assets/jaune.png" title="C'est chèro non ?!" [hidden]="monvote.rating3<2"
+                (click)='monvote.rating3=2'>
+              <img class="star" src="assets/noir.png" title="C'est chèro non ?!" [hidden]="monvote.rating3>1"
+                (click)='monvote.rating3=2'>
+
+              <img class="star" src="assets/jaune.png" title="Ouai, comme à la maison quoi ?!" [hidden]="monvote.rating3<3"
+                (click)='monvote.rating3=3'>
+              <img class="star" src="assets/noir.png" title="Ouai, comme à la maison quoi ?!" [hidden]="monvote.rating3>2"
+                (click)='monvote.rating3=3'>
+
+              <img class="star" src="assets/jaune.png" title="Pas chère" [hidden]="monvote.rating3<4" (click)='monvote.rating3=4'>
+              <img class="star" src="assets/noir.png" title="Pas chère" [hidden]="monvote.rating3>3" (click)='monvote.rating3=4'>
+
+              <img class="star" src="assets/jaune.png" title="Vous réussissez à vivre ?" [hidden]="monvote.rating3<5"
+                (click)='monvote.rating3=5'>
+              <img class="star" src="assets/noir.png" title="Vous réussissez à vivre ?" [hidden]="monvote.rating3>4"
+                (click)='monvote.rating3=5'>
+            </div>
+          </div>          
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="comment">Mon commentaire :</label>
+                <textarea [(ngModel)]="monvote.commentaire" class="form-control" rows="5" id="comment"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="button" class="btn btn-secondary" (click)="modifyVote()">
+                Valider mon vote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!nouveau && monvote && monvote.present == 1 && !modifvote" class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-4">
+              <h6>{{monvote.utilisateur.firstName}} {{monvote.utilisateur.lastName.substring(0,1)}}:</h6>
+            </div>
+            <div *ngIf="now>resto.date" class="col-sm-2">
+              <button type="button" class="btn btn-secondary" (click)="modifvote = true">
+                <i class="fa fa-pencil"></i></button>
+            </div>
+            <div *ngIf="now>resto.date" class="col-sm-6">
+              <img class="star" src="assets/jaune.png" title="Bouffe : BRoowwwaaeargggg (bruit de vomissement)" [hidden]="monvote.rating<1">
+              <img class="star" src="assets/noir.png" title="Bouffe : BRoowwwaaeargggg (bruit de vomissement)" [hidden]="monvote.rating>0">
+
+              <img class="star" src="assets/jaune.png" title="Bouffe : Bof bof" [hidden]="monvote.rating<2">
+              <img class="star" src="assets/noir.png" title="Bouffe : Bof bof" [hidden]="monvote.rating>1">
+
+              <img class="star" src="assets/jaune.png" title="Bouffe : Je fais la meme chose à la maison" [hidden]="monvote.rating<3">
+              <img class="star" src="assets/noir.png" title="Bouffe : Je fais la meme chose à la maison" [hidden]="monvote.rating>2">
+
+              <img class="star" src="assets/jaune.png" title="Bouffe : Miam" [hidden]="monvote.rating<4">
+              <img class="star" src="assets/noir.png" title="Bouffe : Miam" [hidden]="monvote.rating>3">
+
+              <img class="star" src="assets/jaune.png" title="Bouffe : On ne mange pas les oeuvres d'art" [hidden]="monvote.rating<5">
+              <img class="star" src="assets/noir.png" title="Bouffe : On ne mange pas les oeuvres d'art" [hidden]="monvote.rating>4">
+            </div>
+          </div>
+
+          <div *ngIf="now>resto.date" class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+              <img class="star" src="assets/jaune.png" title="Service : Hého ! On est là !" data-toggle="popover" data-trigger="hover"
+                data-content="Some content" [hidden]="monvote.rating2<1">
+              <img class="star" src="assets/noir.png" title="Service : Hého ! On est là !" data-toggle="popover" data-trigger="hover"
+                data-content="Some content" [hidden]="monvote.rating2>0">
+
+              <img class="star" src="assets/jaune.png" title="Service : On mange dans la cuisine?" [hidden]="monvote.rating2<2">
+              <img class="star" src="assets/noir.png" title="Service : On mange dans la cuisine?" [hidden]="monvote.rating2>1">
+
+              <img class="star" src="assets/jaune.png" title="Service : Ouai, comme à la maison quoi ?!" [hidden]="monvote.rating2<3">
+              <img class="star" src="assets/noir.png" title="Service : Ouai, comme à la maison quoi ?!" [hidden]="monvote.rating2>2">
+
+              <img class="star" src="assets/jaune.png" title="Service : Pas mal du tout" [hidden]="monvote.rating2<4">
+              <img class="star" src="assets/noir.png" title="Service : Pas mal du tout" [hidden]="monvote.rating2>3">
+
+              <img class="star" src="assets/jaune.png" title="Service : On est bien là, non ?" [hidden]="monvote.rating2<5">
+              <img class="star" src="assets/noir.png" title="Service : On est bien là, non ?" [hidden]="monvote.rating2>4">
+            </div>
+          </div>
+
+
+          <div *ngIf="now>resto.date" class="row">
+            <div class="col-sm-6">
+              
+            </div>
+            <div class="col-sm-6">
+              <img class="star" src="assets/jaune.png" title="Prix : On ne veut pas acheter le resto" [hidden]="monvote.rating3<1" >
+              <img class="star" src="assets/noir.png" title="Prix : On ne veut pas acheter le resto" [hidden]="monvote.rating3>0" >
+
+              <img class="star" src="assets/jaune.png" title="Prix : C'est chèro non ?!" [hidden]="monvote.rating3<2" >
+              <img class="star" src="assets/noir.png" title="Prix : C'est chèro non ?!" [hidden]="monvote.rating3>1" >
+
+              <img class="star" src="assets/jaune.png" title="Prix : Ouai, comme à la maison quoi ?!" [hidden]="monvote.rating3<3">
+              <img class="star" src="assets/noir.png" title="Prix : Ouai, comme à la maison quoi ?!" [hidden]="monvote.rating3>2">
+
+              <img class="star" src="assets/jaune.png" title="Prix : Pas chère" [hidden]="monvote.rating3<4" >
+              <img class="star" src="assets/noir.png" title="Prix : Pas chère" [hidden]="monvote.rating3>3" >
+
+              <img class="star" src="assets/jaune.png" title="Prix : Vous réussissez à vivre ?" [hidden]="monvote.rating3<5">
+              <img class="star" src="assets/noir.png" title="Prix : Vous réussissez à vivre ?" [hidden]="monvote.rating3>4">
+            </div>
+          </div> 
+          
+          <div *ngIf="now>resto.date" class="row">
+            <div class="col-sm-12">
+              <h6>{{monvote.commentaire}}</h6>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <div *ngFor="let vote of resto.votes" class="row">
+        <div class="col-sm-12">
+
+          <div class="row">
+            <div class="col-sm-6">
+              <h6>{{vote.utilisateur.firstName}} {{vote.utilisateur.lastName.substring(0,1)}}:</h6>
+            </div>
+            <div *ngIf="now>resto.date"  class="col-sm-6">
+              <img class="star" src="assets/jaune.png" title="Bouffe : BRoowwwaaeargggg (bruit de vomissement)" data-toggle="popover"
+                data-trigger="hover" data-content="Some content" [hidden]="vote.rating<1">
+              <img class="star" src="assets/noir.png" title="Bouffe : BRoowwwaaeargggg (bruit de vomissement)" data-toggle="popover"
+                data-trigger="hover" data-content="Some content" [hidden]="vote.rating>0">
+
+              <img class="star" src="assets/jaune.png" title="Bouffe : Bof bof" [hidden]="vote.rating<2">
+              <img class="star" src="assets/noir.png" title="Bouffe : Bof bof" [hidden]="vote.rating>1">
+
+              <img class="star" src="assets/jaune.png" title="Bouffe : Je fais la meme chose à la maison" [hidden]="vote.rating<3">
+              <img class="star" src="assets/noir.png" title="Bouffe : Je fais la meme chose à la maison" [hidden]="vote.rating>2">
+
+              <img class="star" src="assets/jaune.png" title="Bouffe : Miam" [hidden]="vote.rating<4">
+              <img class="star" src="assets/noir.png" title="Bouffe : Miam" [hidden]="vote.rating>3">
+
+              <img class="star" src="assets/jaune.png" title="Bouffe : On ne mange pas les oeuvres d'art" [hidden]="vote.rating<5">
+              <img class="star" src="assets/noir.png" title="Bouffe : On ne mange pas les oeuvres d'art" [hidden]="vote.rating>4">
+            </div>
+
+          </div>
+
+          <div *ngIf="now>resto.date" class="row">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+              <img class="star" src="assets/jaune.png" title="Service : Hého ! On est là !" data-toggle="popover" data-trigger="hover"
+                data-content="Some content" [hidden]="vote.rating2<1">
+              <img class="star" src="assets/noir.png" title="Service : Hého ! On est là !" data-toggle="popover" data-trigger="hover"
+                data-content="Some content" [hidden]="vote.rating2>0">
+
+              <img class="star" src="assets/jaune.png" title="Service : On mange dans la cuisine?" [hidden]="vote.rating2<2">
+              <img class="star" src="assets/noir.png" title="Service : On mange dans la cuisine?" [hidden]="vote.rating2>1">
+
+              <img class="star" src="assets/jaune.png" title="Service : Ouai, comme à la maison quoi ?!" [hidden]="vote.rating2<3">
+              <img class="star" src="assets/noir.png" title="Service : Ouai, comme à la maison quoi ?!" [hidden]="vote.rating2>2">
+
+              <img class="star" src="assets/jaune.png" title="Service : Pas mal du tout" [hidden]="vote.rating2<4">
+              <img class="star" src="assets/noir.png" title="Service : Pas mal du tout" [hidden]="vote.rating2>3">
+
+              <img class="star" src="assets/jaune.png" title="Service : On est bien là, non ?" [hidden]="vote.rating2<5">
+              <img class="star" src="assets/noir.png" title="Service : On est bien là, non ?" [hidden]="vote.rating2>4">
+            </div>
+
+          </div>
+          <div *ngIf="now>resto.date" class="row">
+            <div class="col-sm-6">
+              
+            </div>
+            <div class="col-sm-6">
+              <img class="star" src="assets/jaune.png" title="Prix : On ne veut pas acheter le resto" [hidden]="vote.rating3<1" >
+              <img class="star" src="assets/noir.png" title="Prix : On ne veut pas acheter le resto" [hidden]="vote.rating3>0" >
+
+              <img class="star" src="assets/jaune.png" title="Prix : C'est chèro non ?!" [hidden]="vote.rating3<2" >
+              <img class="star" src="assets/noir.png" title="Prix : C'est chèro non ?!" [hidden]="vote.rating3>1" >
+
+              <img class="star" src="assets/jaune.png" title="Prix : Ouai, comme à la maison quoi ?!" [hidden]="vote.rating3<3">
+              <img class="star" src="assets/noir.png" title="Prix : Ouai, comme à la maison quoi ?!" [hidden]="vote.rating3>2">
+
+              <img class="star" src="assets/jaune.png" title="Prix : Pas chère" [hidden]="vote.rating3<4" >
+              <img class="star" src="assets/noir.png" title="Prix : Pas chère" [hidden]="vote.rating3>3" >
+
+              <img class="star" src="assets/jaune.png" title="Prix : Vous réussissez à vivre ?" [hidden]="vote.rating3<5">
+              <img class="star" src="assets/noir.png" title="Prix : Vous réussissez à vivre ?" [hidden]="vote.rating3>4">
+            </div>
+          </div> 
+          <div class="row">
+            <div class="col-sm-12">
+              <h6>{{vote.commentaire}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="absents" class="row">
+        <div class="col-sm-12">
+          <h3><u>Les absents :</u> {{(monvote && monvote.present==0)?absents.length+1:absents.length}}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="monvote && monvote.present == 0" class="row">
+            <div class="col-sm-6">
+              <h6>{{monvote.utilisateur.firstName}} {{monvote.utilisateur.lastName.substring(0,1)}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let vote of absents" class="row">
+        <div class="col-sm-12">
+          <div *ngIf="vote.present == 0" class="row">
+            <div class="col-sm-6">
+              <h6>{{vote.utilisateur.firstName}} {{vote.utilisateur.lastName.substring(0,1)}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
